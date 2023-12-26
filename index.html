@@ -166,20 +166,20 @@
                 new Date().toLocaleString(),
               reply_to: "external Website youwannareply",
             };
-            // showLoader();
+            showLoader();
 
             // Send the email using Email.js
             emailjs
               .send("service_67vngzg", "template_tgsl1uh", emailParams)
               .then(
                 function (response) {
-                  hideLoader();
+                  // hideLoader();
                   // Handle success and redirect to the next page
                   console.log("Email sent:", response);
                   window.location.href = "yes.html";
                 },
                 function (error) {
-                  hideLoader();
+                  // hideLoader();
                   // Handle error
                   console.error("Failed to send email:", error);
                 }
