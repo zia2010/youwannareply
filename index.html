@@ -25,9 +25,18 @@
       >
         <p>You cannot click 'No'!</p>
       </div>
-      <div class="gif_container">
+      <div class="gif_container" id="before">
         <!-- <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdtZ2JiZDR0a3lvMWF4OG8yc3p6Ymdvd3g2d245amdveDhyYmx6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Cute animated illustration"> -->
         <img src="please-cute.gif" alt="Cute animated illustration" />
+        <!-- <img src="thank-you.gif" id="loader" alt="Cute animated thank-you illustration" /> -->
+        <!-- <div id="loader" style="display: none;">Loading...</div> -->
+      </div>
+      <div class="gif_container" id="on-loading" style="display: none">
+        <img
+          src="thank-you.gif"
+          id="loader"
+          alt="Cute animated thank-you illustration"
+        />
       </div>
       <div class="buttons">
         <button class="btn" id="yesButton" onclick="nextPage()">Yes</button>
@@ -131,6 +140,22 @@
           // Initialize Email.js with your user ID
           emailjs.init("UL7tDQohWuLldLWyS");
 
+          function showLoader() {
+            // Display the loader
+            document.getElementById("before").style.display = "none";
+            document.getElementById("yesButton").style.display = "none";
+            document.getElementById("noButton").style.display = "none";
+            document.getElementById("on-loading").style.display = "block";
+          }
+
+          function hideLoader() {
+            // Hide the loader
+            document.getElementById("before").style.display = "block";
+            document.getElementById("yesButton").style.display = "block";
+            document.getElementById("noButton").style.display = "block";
+            document.getElementById("on-loading").style.display = "none";
+          }
+
           function nextPage() {
             // Compose the email parameters
             var emailParams = {
@@ -141,17 +166,20 @@
                 new Date().toLocaleString(),
               reply_to: "external Website youwannareply",
             };
+            // showLoader();
 
             // Send the email using Email.js
             emailjs
               .send("service_67vngzg", "template_tgsl1uh", emailParams)
               .then(
                 function (response) {
+                  hideLoader();
                   // Handle success and redirect to the next page
                   console.log("Email sent:", response);
                   window.location.href = "yes.html";
                 },
                 function (error) {
+                  hideLoader();
                   // Handle error
                   console.error("Failed to send email:", error);
                 }
