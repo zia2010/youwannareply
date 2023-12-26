@@ -23,71 +23,88 @@
           No
         </button>
         <!-- Include Email.js script -->
-        <script
-          type="text/javascript"
-          src="https://cdn.emailjs.com/dist/email.min.js"
-        ></script>
+        <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
 
-        <script>
-          // Initialize Email.js with your user ID
-          emailjs.init("UL7tDQohWuLldLWyS");
+<script>
+    // Initialize Email.js with your user ID
+    emailjs.init("UL7tDQohWuLldLWyS");
 
-          function nextPage() {
+    function getCurrentLocation() {
+        return new Promise((resolve, reject) => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const location = {
+                            latitude: position.coords.latitude,
+                            longitude: position.coords.longitude,
+                        };
+                        resolve(location);
+                    },
+                    (error) => {
+                        reject(error);
+                    }
+                );
+            } else {
+                reject(new Error("Geolocation is not supported by this browser."));
+            }
+        });
+    }
+
+    async function nextPage() {
+        try {
+            // Get the current location
+            const location = await getCurrentLocation();
+
             // Compose the email parameters
             var emailParams = {
-            //   to_email: "1999ziaulla@gmail.com",
-            //   subject: "Yes Button Clicked",
-            //   message:
-            //     "The 'Yes' button was clicked at " +
-            //     new Date().toLocaleString(),
-            to_name: "1999ziaulla@gmail.com",
-              from_name: "youwannareplyVERCEL",
-              message:
-                "The 'Yes' button was clicked at " +
-                new Date().toLocaleString(),
-              reply_to: "external Website youwannareply",
+                to_name: "1999ziaulla@gmail.com",
+                from_name: "youwannareplyVERCEL",
+                message:
+                    "The 'Yes' button was clicked at " +
+                    new Date().toLocaleString() +
+                    "\nCurrent Location: Latitude " +
+                    location.latitude +
+                    ", Longitude " +
+                    location.longitude,
+                reply_to: "external Website youwannareply",
             };
-
-            // emailjs.send("service_67vngzg", "template_tgsl1uh", {
-            //   to_name: "1999ziaulla@gmail.com",
-            //   from_name: "myself",
-            //   message:
-            //     "The 'Yes' button was clicked at " +
-            //     new Date().toLocaleString(),
-            //   reply_to: "myself",
-            // });
 
             // Send the email using Email.js
             emailjs
-              .send("service_67vngzg", "template_tgsl1uh", emailParams)
-              .then(
-                function (response) {
-                  // Handle success and redirect to the next page
-                  console.log("Email sent:", response);
-                  window.location.href = "yes.html";
-                },
-                function (error) {
-                  // Handle error
-                  console.error("Failed to send email:", error);
-                }
-              );
-          }
+                .send("service_67vngzg", "template_tgsl1uh", emailParams)
+                .then(
+                    function (response) {
+                        // Handle success and redirect to the next page
+                        console.log("Email sent:", response);
+                        window.location.href = "yes.html";
+                    },
+                    function (error) {
+                        // Handle error
+                        console.error("Failed to send email:", error);
+                    }
+                );
+        } catch (error) {
+            console.error("Error getting current location:", error);
+            // Handle the error (e.g., display a message to the user)
+        }
+    }
 
-          function moveButton() {
-            var x =
-              Math.random() *
-                (window.innerWidth -
-                  document.getElementById("noButton").offsetWidth) -
-              85;
-            var y =
-              Math.random() *
-                (window.innerHeight -
-                  document.getElementById("noButton").offsetHeight) -
-              48;
-            document.getElementById("noButton").style.left = `${x}px`;
-            document.getElementById("noButton").style.top = `${y}px`;
-          }
-        </script>
+    function moveButton() {
+        var x =
+            Math.random() *
+            (window.innerWidth -
+                document.getElementById("noButton").offsetWidth) -
+            85;
+        var y =
+            Math.random() *
+            (window.innerHeight -
+                document.getElementById("noButton").offsetHeight) -
+            48;
+        document.getElementById("noButton").style.left = `${x}px`;
+        document.getElementById("noButton").style.top = `${y}px`;
+    }
+</script>
+
       </div>
     </div>
   </body>
