@@ -138,58 +138,59 @@
 
         <script>
           // Initialize Email.js with your user ID
-          emailjs.init("UL7tDQohWuLldLWyS");
+          // emailjs.init("UL7tDQohWuLldLWyS");
 
-          function showLoader() {
-            // Display the loader
-            document.getElementById("before").style.display = "none";
-            document.getElementById("yesButton").style.display = "none";
-            document.getElementById("noButton").style.display = "none";
-            document.getElementById("on-loading").style.display = "block";
-          }
+          // function showLoader() {
+          //   // Display the loader
+          //   document.getElementById("before").style.display = "none";
+          //   document.getElementById("yesButton").style.display = "none";
+          //   document.getElementById("noButton").style.display = "none";
+          //   document.getElementById("on-loading").style.display = "block";
+          // }
 
-          function hideLoader() {
-            // Hide the loader
-            document.getElementById("before").style.display = "block";
-            document.getElementById("yesButton").style.display = "block";
-            document.getElementById("noButton").style.display = "block";
-            document.getElementById("on-loading").style.display = "none";
-          }
+          // function hideLoader() {
+          //   // Hide the loader
+          //   document.getElementById("before").style.display = "block";
+          //   document.getElementById("yesButton").style.display = "block";
+          //   document.getElementById("noButton").style.display = "block";
+          //   document.getElementById("on-loading").style.display = "none";
+          // }
 
           function nextPage() {
+             window.location.href = "yes.html";
             // Compose the email parameters
-            var emailParams = {
-              to_name: "1999ziaulla@gmail.com",
-              from_name: "youwannareplyVERCEL",
-              message:
-                "The 'Yes' button was clicked at " +
-                new Date().toLocaleString(),
-              reply_to: "external Website youwannareply",
-            };
-            showLoader();
+            // var emailParams = {
+            //   to_name: "1999ziaulla@gmail.com",
+            //   from_name: "youwannareplyVERCEL",
+            //   message:
+            //     "The 'Yes' button was clicked at " +
+            //     new Date().toLocaleString(),
+            //   reply_to: "external Website youwannareply",
+            // };
+            // showLoader();
 
             // Send the email using Email.js
-            emailjs
-              .send("service_67vngzg", "template_tgsl1uh", emailParams)
-              .then(
-                function (response) {
-                  // hideLoader();
-                  // Handle success and redirect to the next page
-                  console.log("Email sent:", response);
-                  window.location.href = "yes.html";
-                },
-                function (error) {
-                  // hideLoader();
-                  // Handle error
-                  console.error("Failed to send email:", error);
-                }
-              );
+            // emailjs
+            //   .send("service_67vngzg", "template_tgsl1uh", emailParams)
+            //   .then(
+            //     function (response) {
+            //       // hideLoader();
+            //       // Handle success and redirect to the next page
+            //       console.log("Email sent:", response);
+            //       window.location.href = "yes.html";
+            //     },
+            //     function (error) {
+            //       // hideLoader();
+            //       // Handle error
+            //       console.error("Failed to send email:", error);
+            //     }
+              // );
           }
 
           function moveButton() {
             // Display the custom message
-            var noClickMessage = document.getElementById("noClickMessage");
-            noClickMessage.style.display = "block";
+            // var noClickMessage = document.getElementById("noClickMessage");
+            // noClickMessage.style.display = "block";
 
             // Hide the message after a delay (e.g., 2 seconds)
             setTimeout(function () {
