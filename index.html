@@ -8,6 +8,23 @@
       <div>
         <h1 class="header_text">Please come back sooooon?</h1>
       </div>
+      <div
+        id="noClickMessage"
+        style="
+          display: none;
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background-color: white;
+          padding: 20px;
+          border: 1px solid black;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+          z-index: 1000;
+        "
+      >
+        <p>You cannot click 'No'!</p>
+      </div>
       <div class="gif_container">
         <!-- <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdtZ2JiZDR0a3lvMWF4OG8yc3p6Ymdvd3g2d245amdveDhyYmx6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Cute animated illustration"> -->
         <img src="please-cute.gif" alt="Cute animated illustration" />
@@ -19,6 +36,7 @@
           id="noButton"
           onmouseover="moveButton()"
           onclick="moveButton()"
+          disabled
         >
           No
         </button>
@@ -141,6 +159,14 @@
           }
 
           function moveButton() {
+            // Display the custom message
+            var noClickMessage = document.getElementById("noClickMessage");
+            noClickMessage.style.display = "block";
+
+            // Hide the message after a delay (e.g., 2 seconds)
+            setTimeout(function () {
+              noClickMessage.style.display = "none";
+            }, 2000);
             var x =
               Math.random() *
                 (window.innerWidth -
